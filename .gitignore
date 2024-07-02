@@ -1,0 +1,8 @@
+data/
+__pycache__/
+logs/
+pretrain_weights/
+**/__pycache__/
+.vector_cache/
+experiment_results/*
+logs(old)/

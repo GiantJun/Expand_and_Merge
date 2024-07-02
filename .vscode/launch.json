@@ -1,0 +1,26 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            // "program": "search_param.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            // "args": ["--config","options/multi_steps/continual_clip/cifar100.yaml", "--device", "6"]
+            // "args": ["--config","options/multi_steps/l2p/imagenet_r_shallow_prefixTune.yaml", "--device", "0"]
+            // "args": ["--config","options/cur_exp/multi_steps/super_class/cifar100.yaml", "--device", "1"]
+
+            "args": ["--config","options/multi_steps/fusion_cil/v9_cifar100.yaml", "--device", "0", "--note", "test", "--epochs", "1"]
+            // "args": ["--config","options/multi_steps/icarl_adapter/cifar100.yaml", "--device", "4", "--note", "test"]
+
+            // "args": ["--checkpoint","logs/multi_steps/fusion_cil_v9_cil_replay_herding/cifar100/clip_vit_b_p16-clip_text_b_p16_b20i20/test_20231218_230022",
+            //     "--device", "0", "--note", "test"]
+        }
+    ]
+}

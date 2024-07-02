@@ -1,0 +1,66 @@
+######### Basic Settings #########
+basic:
+    device: '5'
+    seed: [1993] # 1, 42, 50, 100, 1993
+
+    # Dataset Choises: cifar100, cifar100, imagenet100, imagenet1000, tinyimagenet,
+    # skin7, sd198(also known as skin40), mymedmnist
+    dataset: imagenet_r
+    shuffle: false
+
+    # Method Choises: icarl, end2end, dr, ucir, bic, lwm, podnet, mas, joint， finetune
+    method: expand_merge
+    method_type: multi_steps
+    # eval_metric Choises: acc, recall
+    eval_metric: acc
+
+    # Backbone Choises: (e.g. clip_vit_b_p16|clip_text_b_p16 )
+    # vision: clip_vit_b_p16, vit_base_patch16_224, .... (more could be found in backbone.vit.default_cfgs)
+    # text: clip_text_b_p16, bert
+    backbone: clip_vit_b_p16-clip_text_b_p16
+    pretrained: true
+    save_models: true
+
+    ######### Task Settings, unimportant in Joint #########
+    # for some datasets(e.g. MedMNist), this will be ignored
+    split_dataset: true
+    init_cls: 10
+    increment: 10
+
+    ######### Exampler Hyperparameters #########
+    memory_size: 4000
+    fixed_memory: false
+    sampling_method: herding # herding, random, closest_to_mean 
+
+    apply_nme: true
+
+    note: t0.01_hd32_lr1e-2
+    # note: test
+
+######### Method's Hyperparameters #########
+special:
+    incre_type: cil
+    context: A good photo of a {}. # A bad photo of a {}.
+    hidden_dim: 32
+    T: 0.01
+
+######### Experiment Settings for Datasets #########
+options:
+    # experiment settings for cifar100
+    imagenet_r:        
+        clip_vit_b_p16-clip_text_b_p16:
+            img_size: 224
+            epochs: 50 # 50
+            batch_size: 32
+            num_workers: 8
+
+            layer_names: ['transformer.resblocks.{}.attn', 'transformer.resblocks.{}.mlp']
+            
+            opt_type: sgd
+            lrate: 0.01
+            weight_decay: 0.0005
+            opt_mom: 0.9
+            
+            scheduler: multi_step
+            milestones: [15, 30]
+            lrate_decay: 0.1
